@@ -1,0 +1,6 @@
+.past-email:hover{
+ background-color: rgba(154, 149, 149, 0.568);
+ cursor: pointer;
+ padding: 10px;
+ border-radius: 10px;
+}

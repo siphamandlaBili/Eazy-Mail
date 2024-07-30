@@ -1,0 +1,28 @@
+/* Apply global styles */
+.body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: white;
+    width: 100%;
+}
+
+/* Style for the container */
+.content {
+    background: url('https://source.unsplash.com/utwYoEu9SU8/4887x2759') center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for the heading */
+.come{
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+    background: black;
+    padding: 15px 20px;
+    margin: 0;
+}

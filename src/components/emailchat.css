@@ -1,0 +1,19 @@
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Center vertically */
+}
+
+.react-icon {
+  font-size: 20px; /* Size of the icon */
+  color: #3182ce; /* React blue color */
+  transition: color 0.3s, transform 0.3s; /* Smooth transition effects */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  margin: 5px;
+}
+
+.react-icon:hover {
+  color: #282c34; /* Dark color on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
