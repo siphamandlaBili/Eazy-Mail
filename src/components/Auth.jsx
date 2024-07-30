@@ -5,8 +5,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from './firebase';
 import { setDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+const navigate = useNavigate();
+
   // switch form states
 
   const [isLogin, setIsLogin] = useState(true);
@@ -31,7 +34,7 @@ const Auth = () => {
    try {
     await signInWithEmailAndPassword(auth,email,password);
     toast.success("logged in succsesfully");
-    window.location.href = "/home"
+    navigate("/home")
    } catch (error) {
     toast.error(error.message);
    }
