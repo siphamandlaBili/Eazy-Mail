@@ -99,22 +99,35 @@ const EmailChat = () => {
     const isFormValid = input && inputC && inputD && selectedOption;
 
     const saveEmailToFirebase = async () => {
-        if (!email) return;
-
-        try {
-            await addDoc(collection(db, "emails"), {
-                sender_name: input,
-                company_name_writing_to: inputC,
-                purpose_of_the_email: inputD,
-                kind_of_email: selectedOption,
-                email_content: email.join("\n\n"),
-                timestamp: new Date()
-            });
-            toast.success('Email saved successfully!');
-        } catch (error) {
-            console.error("Error saving email: ", error);
-            toast.error('Failed to save email.');
-        }
+        
+            if (!email) return;
+        
+            // Copy to clipboard
+            try {
+                await navigator.clipboard.writeText(email.join("\n\n"));
+                toast.success('Email copied to clipboard!');
+            } catch (error) {
+                console.error('Failed to copy email to clipboard:', error);
+                toast.error('Failed to copy email to clipboard.');
+            }
+        
+            // Save to Firebase
+            try {
+                await addDoc(collection(db, "emails"), {
+                    sender_name: input,
+                    company_name_writing_to: inputC,
+                    purpose_of_the_email: inputD,
+                    kind_of_email: selectedOption,
+                    email_content: email.join("\n\n"),
+                    timestamp: new Date()
+                });
+                toast.success('Email saved successfully!');
+            } catch (error) {
+                console.error("Error saving email: ", error);
+                toast.error('Failed to save email.');
+            }
+        
+        
     };
 
     return (
