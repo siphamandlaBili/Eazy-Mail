@@ -181,3 +181,18 @@ input {
     object-fit: cover;
     transition: transform 500ms ease;
 }
+
+@media (max-width: 722px) {
+.input-container{
+    margin-top: 10px;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #d6e0eb;
+    display: flex;
+    align-items: center;
+}
+
+.login-container, .signup-container{
+    padding: 4px !important;
+}}

@@ -1,4 +1,4 @@
-import { CaretLeft, HouseSimple, CalendarBlank, FileText, SignOut } from '@phosphor-icons/react';
+import { List, HouseSimple, CalendarBlank, FileText, SignOut } from '@phosphor-icons/react';
 import './sidebar.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [activeItem, setActiveItem] = useState('writeEmail');
   const [details, setDetails] = useState({});
 
@@ -55,7 +55,7 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${isActive ? 'active' : ''}`} style={{ borderRight: "1px solid #c6c6c6", paddingRight: "2px" }}>
       <ToastContainer />
-      <div className="menu-btn" onClick={toggleSidebar}><CaretLeft weight="bold" /></div>
+      <div className="menu-btn" onClick={toggleSidebar}><List weight="bold" /></div>
       <div className="head">
         <div className="user-img">
           <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="User" />

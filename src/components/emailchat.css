@@ -17,3 +17,43 @@
   color: #282c34; /* Dark color on hover */
   transform: scale(1.1); /* Slightly enlarge on hover */
 }
+
+/* mobile */
+@media (max-width: 722px) {
+  .container-promt {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-top: 1px solid grey !important;
+  }
+
+  .form-prompt {
+    width: 100% !important;
+    height: 100% !important;
+    border-right: 1px solid rgb(255, 255, 255) !important;
+  }
+
+  .container-output {
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: scroll !important;
+  }
+
+  .css-muzegt {
+    width: 80%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    position: relative;
+}
+
+.mobile-form{
+    margin: 0px !important;
+}
+
+.pick-kind{
+  margin-bottom: 8px;
+    margin-top: 8px;
+}
+}

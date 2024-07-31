@@ -95,7 +95,7 @@ const EmailChat = () => {
     const isFormValid = input && inputC && inputD && selectedOption;
    
     return (
-        <div style={{ height: "100%", width: "100%", margin: "20px", borderBottom: "1px solid grey" }}>
+        <div className='mobile-form' style={{ height: "fit-content", width: "100%", margin: "20px", borderBottom: "1px solid grey" }}>
             <ToastContainer position="top-center" autoClose={2000} />
             <div className="pick-kind" style={{ marginBottom: "8px" }}>
                 <Select placeholder='Purpose of email' w="30%" value={selectedOption} onChange={handleSelectChange}>
