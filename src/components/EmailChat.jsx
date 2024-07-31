@@ -56,7 +56,7 @@ const EmailChat = () => {
         setIsLoading(true);
 
         const submission = {
-            recipient_name: input,
+            sender_name: input,
             company_name_writing_to: inputC,
             purpose_of_the_email: inputD,
             kind_of_email: selectedOption
@@ -72,7 +72,7 @@ const EmailChat = () => {
                     },
                     {
                         role: "user",
-                        content: ` my email address is ${submission.recipient_name} and company name im emailing is ${submission.company_name_writing_to} You are an AI email writer.subject generated using purpose ${submission.purpose_of_the_email} Generate a professional email for the following scenario:\n\n- **Email Address:** ${submission.recipient_name}\n- **Company Name:** ${submission.company_name_writing_to}\n- **Purpose of the Email:** ${submission.purpose_of_the_email}\n- **Type of Email:** ${submission.kind_of_email}\n\nPlease ensure the email is clear, concise, and tailored to the specified purpose. email not more than 70 words`
+                        content: ` my email address is ${submission.sender_name} and company name im emailing is ${submission.company_name_writing_to} You are an AI email writer.subject generated using purpose ${submission.purpose_of_the_email} Generate a professional email for the following scenario:\n\n- **Email Address:** ${submission.sender_name}\n- **Company Name:** ${submission.company_name_writing_to}\n- **Purpose of the Email:** ${submission.purpose_of_the_email}\n- **Type of Email:** ${submission.kind_of_email}\n\nPlease ensure the email is clear, concise, and tailored to the specified purpose. email not more than 70 words`
                     }
                 ]
             }, {
@@ -83,7 +83,7 @@ const EmailChat = () => {
             });
 
             setEmail(AIpost.data.choices[0].message.content.split("\n\n"));
-            if (submission.recipient_name === "" || submission.company_name_writing_to === "" || submission.purpose_of_the_email === "" || submission.kind_of_email === "") {
+            if (submission.sender_name === "" || submission.company_name_writing_to === "" || submission.purpose_of_the_email === "" || submission.kind_of_email === "") {
                 toast.success('Please populate all required fields!');
             } else {
                 toast.success('Email generated successfully!');
@@ -103,7 +103,7 @@ const EmailChat = () => {
 
         try {
             await addDoc(collection(db, "emails"), {
-                recipient_name: input,
+                sender_name: input,
                 company_name_writing_to: inputC,
                 purpose_of_the_email: inputD,
                 kind_of_email: selectedOption,
@@ -130,8 +130,8 @@ const EmailChat = () => {
             <div className="container-promt" style={{ width: "100%", height: "100%", display: "flex", flexDirection: "row", borderTop: "1px solid grey" }}>
                 <div className="form-prompt" style={{ width: "50%", height: "100%", borderRight: "1px solid grey" }}>
                     <FormControl p={7}>
-                        <FormLabel>To :</FormLabel>
-                        <Input required type='email' placeholder='Email address' value={input} onChange={handleInputChange} />
+                        <FormLabel>From :</FormLabel>
+                        <Input required type='text' placeholder='Email address' value={input} onChange={handleInputChange} />
 
                         <FormLabel>Company Name :</FormLabel>
                         <Input type='text' placeholder='Headstarter AI' value={inputC} onChange={handleInputChangeC} />
