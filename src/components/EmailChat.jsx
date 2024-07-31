@@ -15,6 +15,10 @@ import { MdModeEdit } from "react-icons/md";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { db } from './firebase'; // Import Firestore configuration
+import { collection, addDoc } from "firebase/firestore"; 
+
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 
 
@@ -37,17 +41,17 @@ const EmailChat = () => {
     useEffect(() => {
         const split = inputD.trim().split(" ");
 
-        if(split.length == 1){
+        if (split.length === 1) {
             setWordCount(0);
         } else {
-        setWordCount(split.length);
+            setWordCount(split.length);
         }
     }, [inputD]);
 
     const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    const submittForm = async (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
@@ -71,21 +75,21 @@ const EmailChat = () => {
                         content: ` my email address is ${submission.recipient_name} and company name im emailing is ${submission.company_name_writing_to} You are an AI email writer.subject generated using purpose ${submission.purpose_of_the_email} Generate a professional email for the following scenario:\n\n- **Email Address:** ${submission.recipient_name}\n- **Company Name:** ${submission.company_name_writing_to}\n- **Purpose of the Email:** ${submission.purpose_of_the_email}\n- **Type of Email:** ${submission.kind_of_email}\n\nPlease ensure the email is clear, concise, and tailored to the specified purpose. email not more than 70 words`
                     }
                 ]
-            }, { 
+            }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    
+                    'Authorization' : `Bearer ${apiKey}`
                 }
             });
 
             setEmail(AIpost.data.choices[0].message.content.split("\n\n"));
-            if(submission.recipient_name =="" || submission.company_name_writing_to ==""||submission.purpose_of_the_email ==""||submission.kind_of_email ==""){
-                toast.success('please populate all required fields!');
+            if (submission.recipient_name === "" || submission.company_name_writing_to === "" || submission.purpose_of_the_email === "" || submission.kind_of_email === "") {
+                toast.success('Please populate all required fields!');
             } else {
-                toast.success('email generated succsefully !');
+                toast.success('Email generated successfully!');
             }
         } catch (error) {
-            // toast.error('Failed to generate email. Please try again.');
+            toast.error('Failed to generate email. Please try again.');
             console.error('Error generating email:', error);
         } finally {
             setIsLoading(false);
@@ -93,7 +97,26 @@ const EmailChat = () => {
     };
 
     const isFormValid = input && inputC && inputD && selectedOption;
-   
+
+    const saveEmailToFirebase = async () => {
+        if (!email) return;
+
+        try {
+            await addDoc(collection(db, "emails"), {
+                recipient_name: input,
+                company_name_writing_to: inputC,
+                purpose_of_the_email: inputD,
+                kind_of_email: selectedOption,
+                email_content: email.join("\n\n"),
+                timestamp: new Date()
+            });
+            toast.success('Email saved successfully!');
+        } catch (error) {
+            console.error("Error saving email: ", error);
+            toast.error('Failed to save email.');
+        }
+    };
+
     return (
         <div className='mobile-form' style={{ height: "fit-content", width: "100%", margin: "20px", borderBottom: "1px solid grey" }}>
             <ToastContainer position="top-center" autoClose={2000} />
@@ -114,9 +137,9 @@ const EmailChat = () => {
                         <Input type='text' placeholder='Headstarter AI' value={inputC} onChange={handleInputChangeC} />
 
                         <FormLabel>Purpose</FormLabel>
-                        <Textarea placeholder='describe purpose of the email' minH={238} value={inputD} onChange={handleInputChangeD} />
+                        <Textarea placeholder='Describe purpose of the email' minH={238} value={inputD} onChange={handleInputChangeD} />
                         <p>Word count: {wordCount} words</p>
-                        <Button colorScheme='blue' style={{ marginTop: "10px" }} onClick={submittForm} disabled={!isFormValid}>Generate Email</Button>
+                        <Button colorScheme='blue' style={{ marginTop: "10px" }} onClick={submitForm} disabled={!isFormValid}>Generate Email</Button>
                     </FormControl>
                 </div>
                 <div className="container-output" style={{ width: "50%", height: "100%", overflowY: "scroll" }}>
@@ -131,13 +154,13 @@ const EmailChat = () => {
                                 <p key={index} style={{ paddingBottom: "8px" }}>{paragraph}</p>
                             ))}
                             <div style={{ display: "flex", flexDirection: "row", marginTop: "4px" }}>
-                                <FaClipboard className='react-icon' />
+                                <FaClipboard className='react-icon' onClick={saveEmailToFirebase} />
                                 <MdModeEdit className='react-icon' />
                             </div>
                         </Container>
                     ) : (
-                        <div className="placeholder-message" style={{height:"100%", display:"flex", alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
-                            <img style={{height:"10rem"}} src="https://img.icons8.com/?size=100&id=68248&format=png&color=000000" alt="" />
+                        <div className="placeholder-message" style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+                            <img style={{ height: "10rem" }} src="https://img.icons8.com/?size=100&id=68248&format=png&color=000000" alt="" />
                             <p style={{ fontSize: "22px", color: "#343030" }}>Generated email will appear here</p>
                         </div>
                     )}
