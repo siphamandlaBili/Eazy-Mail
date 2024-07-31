@@ -78,7 +78,7 @@ const EmailChat = () => {
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${apiKey}`
+                    // 'Authorization' : `Bearer ${apiKey}`
                 }
             });
 
@@ -89,8 +89,7 @@ const EmailChat = () => {
                 toast.success('Email generated successfully!');
             }
         } catch (error) {
-            toast.error('Failed to generate email. Please try again.');
-            console.error('Error generating email:', error);
+            toast.error('Failed to generate email. API key has been removed ,contact azilebili@gmail.com to ask for access to the project');
         } finally {
             setIsLoading(false);
         }
