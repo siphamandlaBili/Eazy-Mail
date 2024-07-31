@@ -131,7 +131,7 @@ const EmailChat = () => {
                 <div className="form-prompt" style={{ width: "50%", height: "100%", borderRight: "1px solid grey" }}>
                     <FormControl p={7}>
                         <FormLabel>From :</FormLabel>
-                        <Input required type='text' placeholder='Email address' value={input} onChange={handleInputChange} />
+                        <Input required type='text' placeholder='your name' value={input} onChange={handleInputChange} />
 
                         <FormLabel>Company Name :</FormLabel>
                         <Input type='text' placeholder='Headstarter AI' value={inputC} onChange={handleInputChangeC} />
