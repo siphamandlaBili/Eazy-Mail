@@ -14,29 +14,34 @@ import ComingSoon from './components/ToolsComingSoon.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Auth/>
+    element: <Auth/>,
+    action: () => console.log("Navigated to Auth route."),
   },
   {
     path: "/home",
     element: <Home/>,
+    action: () => console.log("Navigated to Home route."),
     children: [
         {
           index: true,
-          element: <EmailChat/>
+          element: <EmailChat/>,
+          action: () => console.log("Navigated to EmailChat route."),
         }
       ,
       {
-        index: true,
-        path:"chat",
-        element: <EmailChat/>
+        path: "chat",
+        element: <EmailChat/>,
+        action: () => console.log("Navigated to Chat route."),
       },
       {
         path: "pastEmails",
-        element: <PastEmails/>
+        element: <PastEmails/>,
+        action: () => console.log("Navigated to PastEmails route."),
       },
       {
         path: "tools",
-        element: <ComingSoon/>
+        element: <ComingSoon/>,
+        action: () => console.log("Navigated to Tools route."),
       },
     ]
   },
@@ -51,3 +56,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </RouterProvider>
   </ChakraProvider>,
 )
+
+// Added log to confirm routing setup
+console.log("Router initialized.");

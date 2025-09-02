@@ -74,15 +74,15 @@ const navigate = useNavigate();
     <div className="form-container">
       <ToastContainer position="top-center" autoClose={2000} />
       <div className={`login-container ${isLogin ? '' : 'hidden'}`}>
-        <h1 className="title">Log In</h1>
-        <p className="desc" style={{ fontSize: "18px" }}>
-          Welcome to EasyMail! Log in now to streamline your email writing, and cold email for that dream job 🫠
+        <h1 className="title">Welcome Back!</h1>
+        <p className="desc" style={{ fontSize: "16px", color: "#555" }}>
+          Log in to access your personalized email dashboard and streamline your communication.
         </p>
         <form onSubmit={handleSubmit}>
           <div className="input-container">
             <input
               type="email"
-              placeholder="Enter Your Email Address"
+              placeholder="Email Address"
               value={email}
               onChange={handleEmailChange}
             />
@@ -90,21 +90,21 @@ const navigate = useNavigate();
           <div className="input-container">
             <input
               type="password"
-              placeholder="Enter Your Password"
+              placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
             />
           </div>
           <div className="account-controls">
-            <button type="submit">
-              login <i className="fas fa-solid fa-angle-right"></i>
+            <button type="submit" className="primary-button">
+              Log In
             </button>
             <a href="#">Forgot Password?</a>
           </div>
         </form>
         <span className="line"></span>
         <span className="signup-text">
-          Don't have an account yet? <a onClick={toggleForm}>Sign up</a>
+          New here? <a onClick={toggleForm}>Create an account</a>
         </span>
       </div>
 
@@ -113,57 +113,53 @@ const navigate = useNavigate();
       </div>
 
       <div className={`signup-container ${isLogin ? 'hidden' : ''}`}>
-        <h1 className="title">Signup</h1>
-        <p className="desc">Create your account to upload or download pictures, videos, or music</p>
-
-      <form onSubmit={handleReg}>
-        <div className="input-container">
+        <h1 className="title">Create Account</h1>
+        <p className="desc" style={{ fontSize: "16px", color: "#555" }}>
+          Join us to experience seamless email management and collaboration.
+        </p>
+        <form onSubmit={handleReg}>
+          <div className="input-container">
             <input
               type="text"
-              placeholder="Enter Your Name"
+              placeholder="First Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-        </div>
-
-        <div className="input-container">
-          <input
-            type="text"
-            placeholder="Enter Your Surname"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
-        </div>
-
-        <div className="input-container">
-          <input
-            type="email"
-            placeholder="Enter Your Email Address"
-            value={regEmail}
-            onChange={(e) => setRegEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="input-container">
-          <input
-            type="password"
-            placeholder="Enter Your Password"
-            value={regPassword}
-            onChange={(e) => setRegPassword(e.target.value)}
-          />
-        </div>
-
-        <div className="account-controls">
-          <button onClick={handleReg}>
-            Next <i className="fas fa-solid fa-angle-right"></i>
-          </button>
-        </div>
-
-        <span className="line"></span>
-        <span className="signup-text">
-          Already have an account? <a onClick={toggleForm}>Login here</a>
-        </span>
-      </form>
+          </div>
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={regEmail}
+              onChange={(e) => setRegEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              value={regPassword}
+              onChange={(e) => setRegPassword(e.target.value)}
+            />
+          </div>
+          <div className="account-controls">
+            <button type="submit" className="primary-button">
+              Sign Up
+            </button>
+          </div>
+          <span className="line"></span>
+          <span className="signup-text">
+            Already have an account? <a onClick={toggleForm}>Log in here</a>
+          </span>
+        </form>
       </div>
     </div>
   );
